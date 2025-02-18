@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /tool
+Disallow: /privacy.html
+Disallow: /terms.html
+
+Sitemap: https://fakeatweet.com/sitemap.xml
