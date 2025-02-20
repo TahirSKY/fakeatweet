@@ -821,9 +821,27 @@ textarea {
     min-width: 200px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
+    #container-6e5ad4d93a0199cfb54603c6f0a3c103 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+    
+    #container-6e5ad4d93a0199cfb54603c6f0a3c103 img {
+        height: 220px;
+    }
+    
+    .recommended-tools {
+        max-width: 1600px;
+        margin: 40px auto;
+        padding: 30px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
     #container-6e5ad4d93a0199cfb54603c6f0a3c103 {
         grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
     }
     
     #container-6e5ad4d93a0199cfb54603c6f0a3c103 img {
@@ -837,9 +855,14 @@ textarea {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1023px) {
     #container-6e5ad4d93a0199cfb54603c6f0a3c103 {
         grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    #container-6e5ad4d93a0199cfb54603c6f0a3c103 img {
+        height: 180px;
     }
 }
 
