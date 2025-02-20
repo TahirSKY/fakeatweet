@@ -821,37 +821,25 @@ textarea {
     min-width: 200px;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
     #container-6e5ad4d93a0199cfb54603c6f0a3c103 {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 1fr;
         gap: 30px;
     }
     
+    #container-6e5ad4d93a0199cfb54603c6f0a3c103 .native-item {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
     #container-6e5ad4d93a0199cfb54603c6f0a3c103 img {
-        height: 220px;
+        height: 300px;
     }
     
     .recommended-tools {
-        max-width: 1600px;
+        max-width: 800px;
         margin: 40px auto;
-        padding: 30px;
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1439px) {
-    #container-6e5ad4d93a0199cfb54603c6f0a3c103 {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-    }
-    
-    #container-6e5ad4d93a0199cfb54603c6f0a3c103 img {
-        height: 200px;
-    }
-    
-    .recommended-tools {
-        max-width: 1200px;
-        margin: 30px auto;
-        padding: 25px;
+        padding: 30px 0;
     }
 }
 
