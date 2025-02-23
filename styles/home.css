@@ -89,6 +89,55 @@
   gap: 12px;
 }
 
+/* Examples Section */
+.examples {
+  max-width: var(--max-width);
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.examples h2 {
+  font-size: 32px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.examples p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.example {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.example:hover {
+  transform: translateY(-4px);
+}
+
+.example img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.example p {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
 /* SEO Content */
 .seo-content {
   max-width: var(--max-width);
