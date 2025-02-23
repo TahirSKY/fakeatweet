@@ -253,7 +253,38 @@
                 </div>
                 
                 <button id="downloadBtn" class="download-btn">Download Tweet</button>
-                
+
+                <div id="disclaimerModal" class="modal">
+                    <div class="modal-content">
+                        <button class="close-btn" aria-label="Close">&times;</button>
+                        <div class="modal-header">
+                            <h3>⚠️ Please Read Carefully</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>By using FakeATweet, you agree:</p>
+                            <ul>
+                                <li><span class="highlight">This is for <strong>parody/humor only</strong></span></li>
+                                <li>You <strong>won't</strong> use this to:
+                                    <ul>
+                                        <li>❌ Spread misinformation</li>
+                                        <li>❌ Impersonate others maliciously</li>
+                                        <li>❌ Commit fraud</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="agreement-box">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeCheckbox"> 
+                                    <span>I pinky swear I'll use this responsibly 😇</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="confirmBtn">Got It - Let Me Meme!</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="recommended-tools">
                     <h3>Don't miss out! We keep you Updated!🔥</h3>
                     <!-- Adsterra Native Banner Start -->

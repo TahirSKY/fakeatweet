@@ -109,11 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
         previewUsername.textContent = username.value ? `@${username.value}` : '@username';
     });
     
-// Update message with line breaks
-message.addEventListener('input', () => {
-    const sanitizedMessage = message.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    previewMessage.innerHTML = sanitizedMessage || "What's happening?";
-});
+    // Update message with line breaks
+    message.addEventListener('input', () => {
+        const sanitizedMessage = message.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        previewMessage.innerHTML = sanitizedMessage || "What's happening?";
+    });
     
     // Update time
     time.addEventListener('input', () => {
@@ -285,17 +285,90 @@ message.addEventListener('input', () => {
     // Prevent form submission
     form.addEventListener('submit', (e) => e.preventDefault());
 
-    // Download functionality
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-        html2canvas(tweetPreview, {
-            scale: 2,
-            backgroundColor: null
-        }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'tweet.png';
-            link.href = canvas.toDataURL();
-            link.click();
+    // Disclaimer Modal Elements
+    const downloadBtn = document.getElementById('downloadBtn');
+    const modal = document.getElementById('disclaimerModal');
+    const checkbox = document.getElementById('agreeCheckbox');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Show modal with animation
+    const showModal = () => {
+        requestAnimationFrame(() => {
+            modal.classList.add('active');
+            // Add active class to modal content after a brief delay to ensure proper animation
+            setTimeout(() => {
+                modal.querySelector('.modal-content').style.opacity = '1';
+                modal.querySelector('.modal-content').style.transform = 'scale(1)';
+            }, 10);
         });
+    };
+
+    // Hide modal with animation
+    const closeModal = () => {
+        const modalContent = modal.querySelector('.modal-content');
+        modalContent.style.opacity = '0';
+        modalContent.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+            modal.classList.remove('active');
+            checkbox.checked = false;
+        }, 300); // Match the transition duration
+    };
+
+    // Download functionality with disclaimer
+    downloadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal();
+    });
+
+    // Confirm button handler
+    confirmBtn.addEventListener('click', () => {
+        if (checkbox.checked) {
+            closeModal();
+            
+            // Trigger the actual download
+            html2canvas(tweetPreview, {
+                scale: 2,
+                backgroundColor: null,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `tweet-${Date.now()}.png`;
+                link.href = canvas.toDataURL();
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }).catch(error => {
+                console.error('Error generating tweet:', error);
+                alert('Error generating tweet image. Please try again.');
+            });
+        } else {
+            alert("Please check the box to confirm you'll use this responsibly!");
+        }
+    });
+
+    // Close button handler
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Prevent closing when clicking modal content
+    modal.querySelector('.modal-content').addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
     });
     
     // Trigger initial preview updates
