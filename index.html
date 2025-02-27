@@ -251,21 +251,43 @@
     </footer>
 
     <script>
-        // Animate user counter
-        const userCounter = document.getElementById('userCounter');
-        const targetCount = parseInt(userCounter.textContent);
-        let currentCount = 0;
-        const duration = 2000; // 2 seconds
-        const interval = 50; // Update every 50ms
-        const increment = targetCount / (duration / interval);
+        // Get user count from localStorage or set default range
+        const defaultRange = { min: 10000, max: 15000 };
+        let userCount = parseInt(localStorage.getItem('userCount')) || Math.floor(Math.random() * (defaultRange.max - defaultRange.min + 1)) + defaultRange.min;
 
-        const timer = setInterval(() => {
-            currentCount = Math.min(currentCount + increment, targetCount);
-            userCounter.textContent = Math.round(currentCount).toLocaleString();
-            if (currentCount >= targetCount) {
-                clearInterval(timer);
+        // Update user count periodically with small random increments
+        const userCounter = document.getElementById('userCounter');
+        const updateInterval = 2 * 60 * 1000; // 2 minutes
+        const maxIncrement = 50;
+
+        function animateCount(start, end, duration) {
+            let startTime = null;
+            const increment = end > start ? 1 : -1;
+
+            function animateStep(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                userCounter.textContent = Math.round(start + (end - start) * progress).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(animateStep);
+                } else {
+                    localStorage.setItem('userCount', end.toString());
+                }
             }
-        }, interval);
+
+            window.requestAnimationFrame(animateStep);
+        }
+
+        function updateCount() {
+            const randomIncrement = Math.floor(Math.random() * maxIncrement);
+            const newCount = userCount + randomIncrement;
+            animateCount(userCount, newCount, 1000);
+            userCount = newCount;
+        }
+
+        updateCount();
+        setInterval(updateCount, updateInterval);
     </script>
 </body>
 </html>
