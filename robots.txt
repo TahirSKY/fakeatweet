@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /tool
-Disallow: /privacy.html
-Disallow: /terms.html
+Disallow: /admin/  # Only block sensitive directories (optional)
 
-Sitemap: https://fakeatweet.com/sitemap.xml
+Sitemap: https://www.fakeatweet.com/sitemap.xml
